@@ -1,0 +1,18 @@
+# Edge FHIR Hybrid - Python Dependencies
+
+# Web framework
+flask==2.3.2
+werkzeug==2.3.6
+
+# Inference (Windows/Linux development)
+onnxruntime==1.15.1
+
+# Optional: For model conversion
+# tensorflow==2.12.0
+# torch==2.0.1
+
+# Testing
+pytest==7.4.0
+
+# Utilities
+numpy==1.24.3

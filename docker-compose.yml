@@ -1,0 +1,37 @@
+services:
+  edge-fhir-hybrid:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: edge-fhir-hybrid
+    ports:
+      - "5000:5000"
+    volumes:
+      # Persist logs across container restarts
+      - ./logs:/app/logs
+      # Persist polling state across container restarts
+      - ./.fhir_polling_tracker.json:/app/.fhir_polling_tracker.json
+    environment:
+      # Flask configuration
+      FLASK_APP: app/server.py
+      FLASK_ENV: production
+      PYTHONUNBUFFERED: 1
+      
+      # FHIR Server configuration (can be overridden)
+      # FHIR_SERVER_BASE_URL: https://hapi.fhir.org/baseR4
+      # FHIR_POLLING_ENABLED: "true"
+      # FHIR_POLLING_INTERVAL: "30"
+      # FHIR_POLLING_BATCH_SIZE: "20"
+    restart: unless-stopped
+    networks:
+      - fhir-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 5s
+
+networks:
+  fhir-network:
+    driver: bridge

@@ -1,0 +1,29 @@
+{
+    "resourceType": "AuditEvent",
+    "id": "audit-001",
+    "type": {
+        "system": "http://terminology.hl7.org/CodeSystem/audit-event-type",
+        "code": "rest",
+        "display": "RESTful Operation"
+    },
+    "action": "E",
+    "recorded": "2025-12-21T12:00:00Z",
+    "outcome": "0",
+    "agent": [{
+        "network": {
+            "address": "192.168.1.77",
+            "type": "2"
+        },
+        "name": "healthcare_worker_01"
+    }],
+    "source": {
+        "observer": {
+            "display": "FHIR Test Client"
+        }
+    },
+    "entity": [{
+        "reference": {
+            "display": "Patient/12345"
+        }
+    }]
+}
